@@ -1,6 +1,6 @@
 import os
 from urllib2 import urlopen, URLError, HTTPError
-
+import zipfile
 
 def mkdir(data_dir):
     if not os.path.exists(data_dir):
@@ -24,3 +24,9 @@ def dlfile(url, data_dir, filename):
         print "HTTP Error:", e.code, url
     except URLError, e:
         print "URL Error:", e.reason, url
+
+
+def unzip_file(src_path, dst_dir):
+    zip_ref = zipfile.ZipFile(src_path, 'r')
+    zip_ref.extractall(dst_dir)
+    zip_ref.close()
